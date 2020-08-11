@@ -14,7 +14,7 @@ file(GLOB src src/*.cpp)
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS} src)
 
-add_executable(run ${src})
+add_executable(Asteroids ${src})
 
 string(STRIP ${SDL2_LIBRARIES} SDL2_LIBRARIES)
-target_link_libraries(run ${SDL2_LIBRARIES})
+target_link_libraries(Asteroids ${SDL2_LIBRARIES})
