@@ -18,6 +18,8 @@ public:
     Game(std::size_t, std::size_t);
     void Run(Controller&, Renderer&);
 private:
+    void Update();
+
     Controller& controller;
     Renderer& renderer;
     std::vector<std::shared_ptr<Asteroid>> Asteroids;

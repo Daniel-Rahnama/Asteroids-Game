@@ -3,7 +3,7 @@
 
 #include "SDL2/SDL.h"
 
-#include "Asteroid.h"
+ #include "Asteroid.h"
 #include "Bullet.h"
 #include "Player.h"
 
@@ -13,12 +13,16 @@
 class Renderer {
 public:
     Renderer(std::size_t, std::size_t, std::size_t, std::size_t);
+    Renderer(const Renderer&) = delete;
+    Renderer& operator=(const Renderer&) = delete;
+    Renderer(Renderer&&);
+    Renderer& operator=(Renderer&&);
     ~Renderer();
     void Render(std::vector<std::shared_ptr<Asteroid>>&, std::vector<std::shared_ptr<Bullet>>&, std::shared_ptr<Player>&);
 private:
-    void AsteroidRender(std::shared_ptr<Asteroid>&);
-    void BulletRender(std::shared_ptr<Bullet>&);
-    void PlayerRender(std::shared_ptr<Player>&);
+    void AsteroidRender(std::shared_ptr<Asteroid>);
+    void BulletRender(std::shared_ptr<Bullet>);
+    void PlayerRender(std::shared_ptr<Player>);
 
     SDL_Window* window;
     SDL_Renderer* renderer;
@@ -27,10 +31,6 @@ private:
     std::size_t screen_height;
     std::size_t grid_width;
     std::size_t grid_height;
-
-    std::vector<std::shared_ptr<Asteroid>> asteroids;
-    std::vector<std::shared_ptr<Bullet>> bullets;
-    std::shared_ptr<Player> player;
 };
 
 #endif /* RENDERER_H */

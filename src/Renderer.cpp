@@ -4,7 +4,7 @@
 #include <future>
 
 Renderer::Renderer(std::size_t screen_width, std::size_t screen_height, std::size_t grid_width, std::size_t grid_height) : 
-    screen_width(screen_width), 
+    screen_width(screen_width),
     screen_height(screen_height),
     grid_width(grid_width),
     grid_height(grid_height) {
@@ -29,15 +29,44 @@ Renderer::Renderer(std::size_t screen_width, std::size_t screen_height, std::siz
     }
 }
 
+Renderer::Renderer(Renderer&& source) {
+    this->window = source.window;
+    this->renderer = source.renderer;
+
+    source.window = nullptr;
+    source.renderer = nullptr;
+
+    this->screen_width = source.screen_width;
+    this->screen_height = source.screen_height;
+    
+    this->grid_width = source.grid_width;
+    this->grid_height = source.grid_height;
+}
+
+Renderer& Renderer::operator=(Renderer&& source) {
+    if (this == &source) return *this;
+
+    this->window = source.window;
+    this->renderer = source.renderer;
+
+    source.window = nullptr;
+    source.renderer = nullptr;
+
+    this->screen_width = source.screen_width;
+    this->screen_height = source.screen_height;
+    
+    this->grid_width = source.grid_width;
+    this->grid_height = source.grid_height;
+
+    return *this;
+}
+
 Renderer::~Renderer() {
     SDL_DestroyWindow(window);
     SDL_Quit();
 }
 
 void Renderer::Render(std::vector<std::shared_ptr<Asteroid>>& asteroids, std::vector<std::shared_ptr<Bullet>>& bullets, std::shared_ptr<Player>& player) {
-    this->asteroids = asteroids;
-    this->bullets = bullets;
-    this->player = player;
 
     SDL_SetRenderDrawColor(renderer, 0x1E, 0x1E, 0x1E, 0xFF);
     SDL_RenderClear(renderer);
@@ -45,14 +74,14 @@ void Renderer::Render(std::vector<std::shared_ptr<Asteroid>>& asteroids, std::ve
     std::vector<std::future<void>> futures;
 
     for (std::shared_ptr<Asteroid>& a : asteroids) {
-        futures.emplace_back(std::async(&Renderer::AsteroidRender, this, std::ref(a)));
+        futures.emplace_back(std::async(&Renderer::AsteroidRender, this, a));
     }
 
     for (std::shared_ptr<Bullet>& b : bullets) {
-        futures.emplace_back(std::async(&Renderer::BulletRender, this, std::ref(b)));
+        futures.emplace_back(std::async(&Renderer::BulletRender, this, b));
     }
 
-    futures.emplace_back(std::async(&Renderer::PlayerRender, this, std::ref(player)));
+    futures.emplace_back(std::async(&Renderer::PlayerRender, this, player));
 
     for (std::future<void>& f : futures) {
         f.wait();
@@ -61,39 +90,30 @@ void Renderer::Render(std::vector<std::shared_ptr<Asteroid>>& asteroids, std::ve
     SDL_RenderPresent(renderer);
 }
 
-void Renderer::AsteroidRender(std::shared_ptr<Asteroid>& a) {}
+void Renderer::AsteroidRender(std::shared_ptr<Asteroid> a) {}
 
-void Renderer::BulletRender(std::shared_ptr<Bullet>& b) {}
+void Renderer::BulletRender(std::shared_ptr<Bullet> b) {
+    SDL_Rect bullet;
 
-void Renderer::PlayerRender(std::shared_ptr<Player>& p) {}
+    bullet.w = 3;
+    bullet.h = 3;
 
-/*
-    SDL_SetRenderDrawColor(renderer, 0x1E, 0x1E, 0x1E, 0xFF);
-    SDL_RenderClear(renderer);
+    bullet.x = b->x();
+    bullet.y = b->y();
 
-    // bullet size
+    SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderFillRect(renderer, &bullet);
+}
 
-    SDL_Rect Bullet;
+void Renderer::PlayerRender(std::shared_ptr<Player> p) {
+    SDL_Rect player;
 
-    Bullet.w = 3;
-    Bullet.h = 3;
+    player.w = p->w();
+    player.h = p->h();
 
-    SDL_SetRenderDrawColor(renderer, 0x33, 0x3C, 0xFF, 0xFF);
-    Bullet.x = 0;
-    Bullet.y = 0;
-    SDL_RenderFillRect(renderer, &Bullet);
+    player.x = p->x();
+    player.y = p->y();
 
-    // Starship size
-    
-    SDL_Rect StarShip;
-
-    StarShip.w = 15;
-    StarShip.h = 40;
-
-    SDL_SetRenderDrawColor(renderer, 0x33, 0x3C, 0xFF, 0xFF);
-    StarShip.x = 300;
-    StarShip.y = 300;
-    SDL_RenderFillRect(renderer, &StarShip);
-
-    SDL_RenderPresent(renderer);
-*/
+    SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderFillRect(renderer, &player);
+}
