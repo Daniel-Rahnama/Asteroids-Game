@@ -106,14 +106,9 @@ void Renderer::BulletRender(std::shared_ptr<Bullet> b) {
 }
 
 void Renderer::PlayerRender(std::shared_ptr<Player> p) {
-    SDL_Rect player;
-
-    player.w = p->w();
-    player.h = p->h();
-
-    player.x = p->x();
-    player.y = p->y();
-
     SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-    SDL_RenderFillRect(renderer, &player);
+
+    SDL_RenderDrawLine(renderer, (p->x() - (p->w() / 2)), (p->y()), (p->x() + (p->w() / 2)), (p->y()));
+    SDL_RenderDrawLine(renderer, (p->x() - (p->w() / 2)), (p->y()), (p->x()), (p->y() - p->h()));
+    SDL_RenderDrawLine(renderer, (p->x() + (p->w() / 2)), (p->y()), (p->x()), (p->y() - p->h()));
 }
