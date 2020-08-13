@@ -111,4 +111,5 @@ void Renderer::PlayerRender(std::shared_ptr<Player> p) {
     SDL_RenderDrawLine(renderer, (p->x() - (p->w() / 2)), (p->y()), (p->x() + (p->w() / 2)), (p->y()));
     SDL_RenderDrawLine(renderer, (p->x() - (p->w() / 2)), (p->y()), (p->x()), (p->y() - p->h()));
     SDL_RenderDrawLine(renderer, (p->x() + (p->w() / 2)), (p->y()), (p->x()), (p->y() - p->h()));
+
 }

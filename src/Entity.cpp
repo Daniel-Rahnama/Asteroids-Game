@@ -16,4 +16,8 @@ const bool& Entity::IsAlive() {
     return _alive;
 }
 
+const double& Entity::Angle() {
+    return _angle;
+}
+
 void Entity::Update() {}
