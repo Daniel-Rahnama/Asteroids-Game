@@ -92,7 +92,39 @@ void Renderer::Render(std::vector<std::shared_ptr<Asteroid>>& asteroids, std::ve
     SDL_RenderPresent(renderer);
 }
 
-void Renderer::AsteroidRender(std::shared_ptr<Asteroid> a) {}
+void Renderer::AsteroidRender(std::shared_ptr<Asteroid> a) {
+    int diameter = (a->GetRadius() * 2);
+
+    int x = (a->GetRadius() - 1);
+    int y = 0;
+    int tx = 1;
+    int ty = 1;
+    int error = (tx - diameter);
+
+    while (x >= y) {
+
+        SDL_RenderDrawPoint(renderer, a->x() + x, a->y() - y);
+        SDL_RenderDrawPoint(renderer, a->x() + x, a->y() + y);
+        SDL_RenderDrawPoint(renderer, a->x() - x, a->y() - y);
+        SDL_RenderDrawPoint(renderer, a->x() - x, a->y() + y);
+        SDL_RenderDrawPoint(renderer, a->x() + y, a->y() - x);
+        SDL_RenderDrawPoint(renderer, a->x() + y, a->y() + x);
+        SDL_RenderDrawPoint(renderer, a->x() - y, a->y() - x);
+        SDL_RenderDrawPoint(renderer, a->x() - y, a->y() + x);
+
+        if (error <= 0) {
+            y++;
+            error += ty;
+            ty += 2;
+        }
+
+        if (error > 0) {
+            x--;
+            tx += 2;
+            error += (tx - diameter);
+        }
+    }
+}
 
 void Renderer::BulletRender(std::shared_ptr<Bullet> b) {
     SDL_Rect bullet;
