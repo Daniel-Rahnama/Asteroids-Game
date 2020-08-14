@@ -14,3 +14,11 @@ Asteroid::Asteroid(AsteroidSize size, int x, int y, double angle) : _size(size) 
         case small: _radius = 20; _speed = 6; break;
     }
 }
+
+const AsteroidSize& Asteroid::GetSize() {
+    return _size;
+}
+
+const int& Asteroid::GetRadius() {
+    return _radius;
+}

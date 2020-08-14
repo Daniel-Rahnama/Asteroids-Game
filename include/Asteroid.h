@@ -18,6 +18,7 @@ public:
     Asteroid& operator=(Asteroid&&);
 
     const AsteroidSize& GetSize();
+    const int& GetRadius();
 private:
     AsteroidSize _size;
     int _radius;

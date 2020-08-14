@@ -1,6 +1,7 @@
 #include "../include/Renderer.h"
 
 #include <iostream>
+#include <string>
 #include <cmath>
 #include <future>
 
@@ -130,4 +131,9 @@ void Renderer::PlayerRender(std::shared_ptr<Player> p) {
     SDL_RenderDrawLine(renderer, x1r, y1r, x2r, y2r);
     SDL_RenderDrawLine(renderer, x1r, y1r, x3r, y3r);
     SDL_RenderDrawLine(renderer, x2r, y2r, x3r, y3r);
+}
+
+void Renderer::UpdateWindowTitle(int score, int FPS) {
+    std::string title = "Asteroids Score: " + std::to_string(score) + " FPS: " + std::to_string(FPS);
+    SDL_SetWindowTitle(window, title.c_str());
 }

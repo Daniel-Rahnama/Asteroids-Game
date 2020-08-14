@@ -19,6 +19,7 @@ public:
     Renderer& operator=(Renderer&&);
     ~Renderer();
     void Render(std::vector<std::shared_ptr<Asteroid>>&, std::vector<std::shared_ptr<Bullet>>&, std::shared_ptr<Player>&);
+    void UpdateWindowTitle(int, int);
 private:
     void AsteroidRender(std::shared_ptr<Asteroid>);
     void BulletRender(std::shared_ptr<Bullet>);
