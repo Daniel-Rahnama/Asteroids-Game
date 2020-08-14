@@ -1,6 +1,7 @@
 #include "../include/Renderer.h"
 
 #include <iostream>
+#include <cmath>
 #include <future>
 
 Renderer::Renderer(std::size_t screen_width, std::size_t screen_height, std::size_t grid_width, std::size_t grid_height) : 
@@ -108,8 +109,25 @@ void Renderer::BulletRender(std::shared_ptr<Bullet> b) {
 void Renderer::PlayerRender(std::shared_ptr<Player> p) {
     SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
-    SDL_RenderDrawLine(renderer, (p->x() - (p->w() / 2)), (p->y()), (p->x() + (p->w() / 2)), (p->y()));
-    SDL_RenderDrawLine(renderer, (p->x() - (p->w() / 2)), (p->y()), (p->x()), (p->y() - p->h()));
-    SDL_RenderDrawLine(renderer, (p->x() + (p->w() / 2)), (p->y()), (p->x()), (p->y() - p->h()));
+    double angle = 2 * 3.1415 * (p->Angle() / 360);
 
+    double x1 = p->x();
+    double y1 = p->y() - p->h() / 2;
+    double x2 = p->x() + p->w() / 2;
+    double y2 = p->y() + p->h() / 2;
+    double x3 = p->x() - p->w() / 2;
+    double y3 = y2;
+
+    double x1r = ((x1 - p->x()) * cos(angle) - (y1 - p->y()) * sin(angle) + p->x());
+    double y1r = ((x1 - p->x()) * sin(angle) + (y1 - p->y()) * cos(angle) + p->y());
+
+    double x2r = ((x2 - p->x()) * cos(angle) - (y2 - p->y()) * sin(angle) + p->x());
+    double y2r = ((x2 - p->x()) * sin(angle) + (y2 - p->y()) * cos(angle) + p->y());
+
+    double x3r = ((x3 - p->x()) * cos(angle) - (y3 - p->y()) * sin(angle) + p->x());
+    double y3r = ((x3 - p->x()) * sin(angle) + (y3 - p->y()) * cos(angle) + p->x());
+
+    SDL_RenderDrawLine(renderer, x1r, y1r, x2r, y2r);
+    SDL_RenderDrawLine(renderer, x1r, y1r, x3r, y3r);
+    SDL_RenderDrawLine(renderer, x2r, y2r, x3r, y3r);
 }
