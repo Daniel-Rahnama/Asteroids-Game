@@ -5,9 +5,11 @@
 
 #include "Player.h"
 
+#include <memory>
+
 class Controller {
 public:
-    void HandleInput(bool&, Player&);
+    void HandleInput(bool&, std::shared_ptr<Player>);
 private:
     void KeepTrue();
     void MoveForward();
@@ -16,6 +18,8 @@ private:
     void FireBullet();
 
     friend class Player;
+
+    std::shared_ptr<Player> _player;
 };
 
 #endif /* CONTROLLER_H */

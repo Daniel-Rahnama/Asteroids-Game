@@ -4,10 +4,12 @@
 #include "../include/Bullet.h"
 #include "../include/Player.h"
 #include "../include/Asteroid.h"
+#include "../include/Controller.h"
 
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <thread>
 
 int main(int argv, char* argc[]) {
 
@@ -18,6 +20,8 @@ int main(int argv, char* argc[]) {
 
     Renderer renderer(Screen_Width, Screen_Height, Grid_Width, Grid_Height);
 
+    Controller controller;
+    
     std::vector<std::shared_ptr<Asteroid>> asteroids;
     asteroids.emplace_back(std::make_shared<Asteroid>(large, 400, 400, 0.0));
 
@@ -27,8 +31,9 @@ int main(int argv, char* argc[]) {
     std::shared_ptr<Player> player = std::make_shared<Player>();
     
     renderer.Render(asteroids, bullets, player);
+    bool running = true;
+    controller.HandleInput(running, player);
 
-    std::cin.get();
     return 0;
 }
 

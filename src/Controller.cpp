@@ -1,6 +1,8 @@
 #include "../include/Controller.h"
 
-void Controller::HandleInput(bool& running, Player& player) {
+void Controller::HandleInput(bool& running, std::shared_ptr<Player> player) {
+    _player = player;
+    
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT) {
