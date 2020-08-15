@@ -8,6 +8,8 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <chrono>
+#include <thread>
 
 int main(int argv, char* argc[]) {
 
@@ -19,7 +21,7 @@ int main(int argv, char* argc[]) {
     Renderer renderer(Screen_Width, Screen_Height, Grid_Width, Grid_Height);
 
     std::vector<std::shared_ptr<Asteroid>> asteroids;
-    asteroids.emplace_back(std::make_shared<Asteroid>(large, 400, 400, 250));
+    asteroids.emplace_back(std::make_shared<Asteroid>(large, 400, 400, 0.0));
 
     std::vector<std::shared_ptr<Bullet>> bullets;
     bullets.emplace_back(std::make_shared<Bullet>(400, 400, 0.0));

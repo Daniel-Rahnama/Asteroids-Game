@@ -73,6 +73,8 @@ void Renderer::Render(std::vector<std::shared_ptr<Asteroid>>& asteroids, std::ve
     SDL_SetRenderDrawColor(renderer, 0x1E, 0x1E, 0x1E, 0xFF);
     SDL_RenderClear(renderer);
 
+    SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+
     std::vector<std::future<void>> futures;
 
     for (std::shared_ptr<Asteroid>& a : asteroids) {
@@ -102,7 +104,7 @@ void Renderer::AsteroidRender(std::shared_ptr<Asteroid> a) {
     int error = (tx - diameter);
 
     while (x >= y) {
-
+        
         SDL_RenderDrawPoint(renderer, a->x() + x, a->y() - y);
         SDL_RenderDrawPoint(renderer, a->x() + x, a->y() + y);
         SDL_RenderDrawPoint(renderer, a->x() - x, a->y() - y);
@@ -135,13 +137,10 @@ void Renderer::BulletRender(std::shared_ptr<Bullet> b) {
     bullet.x = b->x();
     bullet.y = b->y();
 
-    SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderFillRect(renderer, &bullet);
 }
 
 void Renderer::PlayerRender(std::shared_ptr<Player> p) {
-    SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-
     double angle = 2 * 3.1415 * (p->Angle() / 360);
 
     double x1 = p->x();
