@@ -1,6 +1,6 @@
 # Asteroids
 
-## Dependencies for Running Locally
+## Dependencies for Building Locally
 * cmake >= 3.7
   * All OSes: [click here for installation instructions](https://cmake.org/install/).
 * make >= 4.1 (Linux, Mac), 3.81 (Windows)
@@ -16,7 +16,6 @@
   * Windows: recommend using [MinGW](http://www.mingw.org/).
   
 ## Build Instructions
-
 1. Clone this repo.
 2. Make a build directory in the top level directory: `mkdir build && cd build`.
 3. Compile: `cmake .. && make`.
