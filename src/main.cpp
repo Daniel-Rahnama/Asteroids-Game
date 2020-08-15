@@ -31,9 +31,11 @@ int main(int argv, char* argc[]) {
     std::shared_ptr<Player> player = std::make_shared<Player>();
     
     renderer.Render(asteroids, bullets, player);
+
     bool running = true;
     controller.HandleInput(running, player);
 
+    std::cin.get();
     return 0;
 }
 
