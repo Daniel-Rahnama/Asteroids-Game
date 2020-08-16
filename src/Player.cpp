@@ -3,6 +3,8 @@
 Player::Player() {
     _alive = true;
 
+    _speed = 0;
+
     _x = 400;
     _y = 400;
 

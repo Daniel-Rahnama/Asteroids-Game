@@ -9,6 +9,7 @@
 
 #include <vector>
 #include <memory>
+#include <mutex>
 
 class Renderer {
 public:
@@ -32,6 +33,8 @@ private:
     std::size_t screen_height;
     std::size_t grid_width;
     std::size_t grid_height;
+
+    std::mutex renderMtx;
 };
 
 #endif /* RENDERER_H */

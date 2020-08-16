@@ -10,6 +10,12 @@ public:
     Bullet& operator=(const Bullet&) = delete;
     Bullet(Bullet&&);
     Bullet& operator=(Bullet&&);
+
+    const int& w();
+    const int& h();
+private:
+    int _w;
+    int _h;
 };
 
 #endif /* BULLET_H */

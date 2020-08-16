@@ -103,8 +103,10 @@ void Renderer::AsteroidRender(std::shared_ptr<Asteroid> a) {
     int ty = 1;
     int error = (tx - diameter);
 
+    std::lock_guard<std::mutex> lock(renderMtx);
+
     while (x >= y) {
-        
+
         SDL_RenderDrawPoint(renderer, a->x() + x, a->y() - y);
         SDL_RenderDrawPoint(renderer, a->x() + x, a->y() + y);
         SDL_RenderDrawPoint(renderer, a->x() - x, a->y() - y);
@@ -131,12 +133,13 @@ void Renderer::AsteroidRender(std::shared_ptr<Asteroid> a) {
 void Renderer::BulletRender(std::shared_ptr<Bullet> b) {
     SDL_Rect bullet;
 
-    bullet.w = 3;
-    bullet.h = 3;
+    bullet.w = b->w();
+    bullet.h = b->h();
 
     bullet.x = b->x();
     bullet.y = b->y();
 
+    std::lock_guard<std::mutex> lck(renderMtx);
     SDL_RenderFillRect(renderer, &bullet);
 }
 
@@ -159,6 +162,7 @@ void Renderer::PlayerRender(std::shared_ptr<Player> p) {
     double x3r = ((x3 - p->x()) * cos(angle) - (y3 - p->y()) * sin(angle) + p->x());
     double y3r = ((x3 - p->x()) * sin(angle) + (y3 - p->y()) * cos(angle) + p->x());
 
+    std::lock_guard<std::mutex> lck(renderMtx);
     SDL_RenderDrawLine(renderer, x1r, y1r, x2r, y2r);
     SDL_RenderDrawLine(renderer, x1r, y1r, x3r, y3r);
     SDL_RenderDrawLine(renderer, x2r, y2r, x3r, y3r);
