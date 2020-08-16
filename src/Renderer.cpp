@@ -5,11 +5,10 @@
 #include <cmath>
 #include <future>
 
-Renderer::Renderer(std::size_t screen_width, std::size_t screen_height, std::size_t grid_width, std::size_t grid_height) : 
+Renderer::Renderer(std::size_t screen_width, std::size_t screen_height) : 
     screen_width(screen_width),
-    screen_height(screen_height),
-    grid_width(grid_width),
-    grid_height(grid_height) {
+    screen_height(screen_height)
+    {
     
     if (SDL_Init(SDL_INIT_VIDEO) < 0) { 
         std::cout << "SDL could not initialize.\n";
@@ -40,9 +39,6 @@ Renderer::Renderer(Renderer&& source) {
 
     this->screen_width = source.screen_width;
     this->screen_height = source.screen_height;
-    
-    this->grid_width = source.grid_width;
-    this->grid_height = source.grid_height;
 }
 
 Renderer& Renderer::operator=(Renderer&& source) {
@@ -56,9 +52,6 @@ Renderer& Renderer::operator=(Renderer&& source) {
 
     this->screen_width = source.screen_width;
     this->screen_height = source.screen_height;
-    
-    this->grid_width = source.grid_width;
-    this->grid_height = source.grid_height;
 
     return *this;
 }

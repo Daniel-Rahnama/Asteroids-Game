@@ -22,9 +22,9 @@ public:
 private:
     void Update();
 
-    std::vector<std::shared_ptr<Asteroid>> Asteroids;
-    std::vector<std::shared_ptr<Bullet>> Bullets;
-    std::shared_ptr<Player> Player;
+    std::vector<std::shared_ptr<Asteroid>> asteroids;
+    std::vector<std::shared_ptr<Bullet>> bullets;
+    std::shared_ptr<Player> player;
 
     std::size_t Grid_Width;
     std::size_t Grid_Height;

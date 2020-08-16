@@ -1,12 +1,14 @@
 #include "../include/Game.h"
 
-Game::Game(std::size_t Grid_Width, std::size_t Grid_Height) : Grid_Width(Grid_Width), Grid_Height(Grid_Height), Score(0) {
-    Asteroids.emplace_back(std::make_shared<Asteroids>(large, 100, 100, 135));
-    Asteroids.emplace_back(std::make_shared<Asteroids>(large, 100, 700, 45));
-    Asteroids.emplace_back(std::make_shared<Asteroids>(large, 700, 100, 225));
-    Asteroids.emplace_back(std::make_shared<Asteroids>(large, 700, 700, 315));
+#include <iostream>
 
-    Player = std::make_shared<Player>();
+Game::Game(std::size_t Grid_Width, std::size_t Grid_Height) : Grid_Width(Grid_Width), Grid_Height(Grid_Height), Score(0) {
+    asteroids.emplace_back(std::make_shared<Asteroid>(large, 100, 100, 135));
+    asteroids.emplace_back(std::make_shared<Asteroid>(large, 100, 700, 45));
+    asteroids.emplace_back(std::make_shared<Asteroid>(large, 700, 100, 225));
+    asteroids.emplace_back(std::make_shared<Asteroid>(large, 700, 700, 315));
+
+    player = std::make_shared<Player>();
 }
 
 void Game::Run(Controller& controller, Renderer& renderer, const int& Target_Frame_Duration) {
@@ -21,9 +23,9 @@ void Game::Run(Controller& controller, Renderer& renderer, const int& Target_Fra
     while (running) {
         Frame_Start = SDL_GetTicks();
 
-        controller.HandleInput(running, Player);
+        controller.HandleInput(running, player);
 
-        renderer.Render(Asteroids, Bullets, Player);
+        renderer.Render(asteroids, bullets, player);
 
         Frame_End = SDL_GetTicks();
 
@@ -40,4 +42,5 @@ void Game::Run(Controller& controller, Renderer& renderer, const int& Target_Fra
             SDL_Delay(Target_Frame_Duration - Frame_Duration);
         }
     }
+    std::cout << "Score: " << Score << std::endl;
 }

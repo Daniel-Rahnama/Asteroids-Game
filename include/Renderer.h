@@ -13,7 +13,7 @@
 
 class Renderer {
 public:
-    Renderer(std::size_t, std::size_t, std::size_t, std::size_t);
+    Renderer(std::size_t, std::size_t);
     Renderer(const Renderer&) = delete;
     Renderer& operator=(const Renderer&) = delete;
     Renderer(Renderer&&);
@@ -31,8 +31,6 @@ private:
 
     std::size_t screen_width;
     std::size_t screen_height;
-    std::size_t grid_width;
-    std::size_t grid_height;
 
     std::mutex renderMtx;
 };
