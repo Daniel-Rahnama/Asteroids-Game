@@ -5,7 +5,7 @@
 #include "../include/Controller.h"
 #include "../include/Game.h"
 
-int main(int argv, char* argc[]) {
+int main() {
 
     const unsigned int Screen_Width = 800;
     const unsigned int Screen_Height = 800;
