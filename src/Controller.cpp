@@ -44,19 +44,9 @@ void Controller::FireBullet() {
 
     double x1 = _player->x();
     double y1 = _player->y() - _player->h() / 2;
-    double x2 = _player->x() + _player->w() / 2;
-    double y2 = _player->y() + _player->h() / 2;
-    double x3 = _player->x() - _player->w() / 2;
-    double y3 = y2;
 
     double x1r = ((x1 - _player->x()) * cos(angle) - (y1 - _player->y()) * sin(angle) + _player->x());
     double y1r = ((x1 - _player->x()) * sin(angle) + (y1 - _player->y()) * cos(angle) + _player->y());
-
-    double x2r = ((x2 - _player->x()) * cos(angle) - (y2 - _player->y()) * sin(angle) + _player->x());
-    double y2r = ((x2 - _player->x()) * sin(angle) + (y2 - _player->y()) * cos(angle) + _player->y());
-
-    double x3r = ((x3 - _player->x()) * cos(angle) - (y3 - _player->y()) * sin(angle) + _player->x());
-    double y3r = ((x3 - _player->x()) * sin(angle) + (y3 - _player->y()) * cos(angle) + _player->x());
 
     _bullets->emplace_back(std::make_shared<Bullet>(x1r, y1r, _player->_angle));
 }
