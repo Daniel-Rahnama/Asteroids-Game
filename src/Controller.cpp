@@ -1,7 +1,8 @@
 #include "../include/Controller.h"
 
-void Controller::HandleInput(bool& running, std::shared_ptr<Player> player) {
+void Controller::HandleInput(bool& running, std::shared_ptr<Player> player, std::vector<std::shared_ptr<Bullet>>& bullets) {
     _player = player;
+    _bullets = &bullets;
     
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
@@ -39,5 +40,5 @@ void Controller::TurnRight() {
 }
 
 void Controller::FireBullet() {
-    // _bullets.emplace_back(std::make_shared<Bullet>(_player->x(), (_player->y() + _player->h()), _player->Angle()));
+    _bullets->emplace_back(std::make_shared<Bullet>(_player->x(), (_player->y() - _player->h()), _player->_angle));
 }

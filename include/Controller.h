@@ -12,7 +12,7 @@
 
 class Controller {
 public:
-    void HandleInput(bool&, std::shared_ptr<Player>);
+    void HandleInput(bool&, std::shared_ptr<Player>, std::vector<std::shared_ptr<Bullet>>&);
 private:
     void KeepTrue();
     void MoveForward();
@@ -21,6 +21,7 @@ private:
     void FireBullet();
 
     std::shared_ptr<Player> _player;
+    std::vector<std::shared_ptr<Bullet>>* _bullets;
 };
 
 #endif /* CONTROLLER_H */

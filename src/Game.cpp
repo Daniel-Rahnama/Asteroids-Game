@@ -9,6 +9,7 @@ Game::Game(std::size_t Grid_Width, std::size_t Grid_Height) : Grid_Width(Grid_Wi
     asteroids.emplace_back(std::make_shared<Asteroid>(large, 700, 700, 315));
 
     player = std::make_shared<Player>();
+
 }
 
 void Game::Run(Controller& controller, Renderer& renderer, const int& Target_Frame_Duration) {
@@ -23,7 +24,7 @@ void Game::Run(Controller& controller, Renderer& renderer, const int& Target_Fra
     while (running) {
         Frame_Start = SDL_GetTicks();
 
-        controller.HandleInput(running, player);
+        controller.HandleInput(running, player, bullets);
 
         renderer.Render(asteroids, bullets, player);
 
