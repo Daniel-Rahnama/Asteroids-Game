@@ -31,13 +31,13 @@ void Controller::MoveForward() {
 }
 
 void Controller::TurnLeft() {
-
+    _player->_angle -= 8;
 }
 
 void Controller::TurnRight() {
-
+    _player->_angle += 8;
 }
 
 void Controller::FireBullet() {
-
+    // _bullets.emplace_back(std::make_shared<Bullet>(_player->x(), (_player->y() + _player->h()), _player->Angle()));
 }

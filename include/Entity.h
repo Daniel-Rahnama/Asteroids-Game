@@ -10,6 +10,7 @@ public:
     const bool& IsAlive();
     const double& Angle();
 protected:
+    friend class Controller;
     int _x;
     int _y;
     int _speed;

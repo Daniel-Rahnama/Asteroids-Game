@@ -4,8 +4,11 @@
 #include "SDL2/SDL.h"
 
 #include "Player.h"
+#include "Entity.h"
+#include "Bullet.h"
 
 #include <memory>
+#include <vector>
 
 class Controller {
 public:
@@ -16,8 +19,6 @@ private:
     void TurnLeft();
     void TurnRight();
     void FireBullet();
-
-    friend class Player;
 
     std::shared_ptr<Player> _player;
 };
