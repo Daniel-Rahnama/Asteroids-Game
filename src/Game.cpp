@@ -1,6 +1,7 @@
 #include "../include/Game.h"
 
 #include <iostream>
+#include <future>
 
 Game::Game(std::size_t Grid_Width, std::size_t Grid_Height) : Grid_Width(Grid_Width), Grid_Height(Grid_Height), Score(0) {
     asteroids.emplace_back(std::make_shared<Asteroid>(large, 100, 100, 135));
@@ -26,6 +27,8 @@ void Game::Run(Controller& controller, Renderer& renderer, const int& Target_Fra
 
         controller.HandleInput(running, player, bullets);
 
+        Update();
+
         renderer.Render(asteroids, bullets, player);
 
         Frame_End = SDL_GetTicks();
@@ -44,4 +47,12 @@ void Game::Run(Controller& controller, Renderer& renderer, const int& Target_Fra
         }
     }
     std::cout << "Score: " << Score << std::endl;
+}
+
+void Game::Update() {
+    std::vector<std::future<void>> futures;
+
+    for (std::shared_ptr<Bullet>& b : bullets) {
+        futures.emplace_back(std::async(&Bullet::Update, b.get()));
+    }
 }
