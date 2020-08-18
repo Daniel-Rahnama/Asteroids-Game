@@ -2,8 +2,13 @@
 
 #include <iostream>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <future>
 #include <algorithm>
+||||||| 20d7023... Implemented Bullet Movement
+#include <future>
+=======
+>>>>>>> parent of 20d7023... Implemented Bullet Movement
 ||||||| 20d7023... Implemented Bullet Movement
 #include <future>
 =======
@@ -51,6 +56,7 @@ void Game::Run(Controller& controller, Renderer& renderer, const int& Target_Fra
         }
     }
     std::cout << "Score: " << Score << std::endl;
+<<<<<<< HEAD
 }
 
 void Game::Update() {
@@ -70,4 +76,15 @@ void Game::Update() {
 
     bullets.erase(std::remove_if(bullets.begin(), bullets.end(), [](std::shared_ptr<Bullet>& b) { return !b->IsAlive(); }));
     asteroids.erase(std::remove_if(asteroids.begin(), asteroids.end(), [](std::shared_ptr<Asteroid>& a) { return !a->IsAlive(); }));
+||||||| 20d7023... Implemented Bullet Movement
+}
+
+void Game::Update() {
+    std::vector<std::future<void>> futures;
+
+    for (std::shared_ptr<Bullet>& b : bullets) {
+        futures.emplace_back(std::async(&Bullet::Update, b.get()));
+    }
+=======
+>>>>>>> parent of 20d7023... Implemented Bullet Movement
 }
