@@ -23,3 +23,5 @@ const int& Player::w() {
 const int& Player::h() {
     return _h;
 }
+
+void Player::Update() {}

@@ -3,12 +3,13 @@
 
 class Entity {
 public:
-    virtual void Update();
     const int& x();
     const int& y();
     const int& s();
     const bool& IsAlive();
     const double& Angle();
+
+    virtual void Update() = 0;
 protected:
     friend class Controller;
     int _x;

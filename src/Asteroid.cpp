@@ -1,5 +1,7 @@
 #include "../include/Asteroid.h"
 
+#include <cmath>
+
 Asteroid::Asteroid(AsteroidSize size, int x, int y, double angle) : _size(size) {
     _angle = angle;
 
@@ -26,8 +28,9 @@ const int& Asteroid::GetRadius() {
 void Asteroid::Update() {
     double angle = 2 * 3.1415 * (_angle / 360);
 
-    _x += _speed * cos(angle);
-    _y += _speed * sin(angle);
+    _x += _speed * sin(angle);
+    _y -= _speed * cos(angle);
 
-    if (_x > 800 || _y > 800) _alive = false;
+    if (_x >= 800) _x -= 800;
+    if (_y >= 800) _y -= 800;
 }

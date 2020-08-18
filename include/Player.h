@@ -13,6 +13,8 @@ public:
 
     const int& w();
     const int& h();
+
+    void Update() override;
 private:
     int _w;
     int _h;

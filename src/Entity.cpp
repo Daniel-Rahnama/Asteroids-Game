@@ -19,5 +19,3 @@ const bool& Entity::IsAlive() {
 const double& Entity::Angle() {
     return _angle;
 }
-
-void Entity::Update() {}
