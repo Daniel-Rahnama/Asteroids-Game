@@ -2,12 +2,13 @@
 
 #include <iostream>
 #include <future>
+#include <algorithm>
 
 Game::Game(std::size_t Grid_Width, std::size_t Grid_Height) : Grid_Width(Grid_Width), Grid_Height(Grid_Height), Score(0) {
-    asteroids.emplace_back(std::make_shared<Asteroid>(large, 100, 100, 135));
-    asteroids.emplace_back(std::make_shared<Asteroid>(large, 100, 700, 45));
-    asteroids.emplace_back(std::make_shared<Asteroid>(large, 700, 100, 225));
-    asteroids.emplace_back(std::make_shared<Asteroid>(large, 700, 700, 315));
+    asteroids.emplace_back(std::make_shared<Asteroid>(large, 100, 100, 225));
+    asteroids.emplace_back(std::make_shared<Asteroid>(large, 100, 700, 315));
+    asteroids.emplace_back(std::make_shared<Asteroid>(large, 700, 100, 135));
+    asteroids.emplace_back(std::make_shared<Asteroid>(large, 700, 700, 45));
 
     player = std::make_shared<Player>();
 
@@ -55,4 +56,15 @@ void Game::Update() {
     for (std::shared_ptr<Bullet>& b : bullets) {
         futures.emplace_back(std::async(&Bullet::Update, b.get()));
     }
+
+    for (std::shared_ptr<Asteroid>& a : asteroids) {
+        futures.emplace_back(std::async(&Asteroid::Update, a.get()));
+    }
+    
+    for (std::future<void>& f : futures) {
+        f.wait();
+    }
+
+    bullets.erase(std::remove_if(bullets.begin(), bullets.end(), [](std::shared_ptr<Bullet>& b) { return !b->IsAlive(); }));
+    asteroids.erase(std::remove_if(asteroids.begin(), asteroids.end(), [](std::shared_ptr<Asteroid>& a) { return !a->IsAlive(); }));
 }

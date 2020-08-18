@@ -19,6 +19,8 @@ public:
 
     const AsteroidSize& GetSize();
     const int& GetRadius();
+
+    void Update() override;
 private:
     AsteroidSize _size;
     int _radius;
