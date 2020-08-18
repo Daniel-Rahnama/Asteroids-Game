@@ -30,7 +30,7 @@ void Game::Run(Controller& controller, Renderer& renderer, const int& Target_Fra
 
         Update();
 
-        // if (!asteroids.empty()) asteroids.erase(std::remove_if(asteroids.begin(), asteroids.end(), [](std::shared_ptr<Asteroid>& a) { return !a->IsAlive(); }));
+        if (!asteroids.empty()) asteroids.erase(std::remove_if(asteroids.begin(), asteroids.end(), [](std::shared_ptr<Asteroid>& a) { return !a->IsAlive(); }));
         if (!bullets.empty()) bullets.erase(std::remove_if(bullets.begin(), bullets.end(), [](std::shared_ptr<Bullet>& b) { return !b->IsAlive(); }));
 
         if (!player->IsAlive()) running = false;

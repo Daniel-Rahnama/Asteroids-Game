@@ -3,18 +3,18 @@
 
 class Entity {
 public:
-    const int& x();
-    const int& y();
-    const int& s();
+    const unsigned int& x();
+    const unsigned int& y();
+    const unsigned int& s();
     const bool& IsAlive();
     const double& Angle();
 
     virtual void Update() = 0;
 protected:
     friend class Controller;
-    int _x;
-    int _y;
-    int _speed;
+    unsigned int _x;
+    unsigned int _y;
+    unsigned int _speed;
     bool _alive;
     double _angle;
 };

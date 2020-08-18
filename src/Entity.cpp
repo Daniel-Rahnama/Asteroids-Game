@@ -1,14 +1,14 @@
 #include "../include/Entity.h"
 
-const int& Entity::x() {
+const unsigned int& Entity::x() {
     return _x;
 }
 
-const int& Entity::y() {
+const unsigned int& Entity::y() {
     return _y;
 }
 
-const int& Entity::s() {
+const unsigned int& Entity::s() {
     return _speed;
 }
 

@@ -27,6 +27,6 @@ void Bullet::Update() {
     _x += _speed * sin(angle);
     _y -= _speed * cos(angle);
 
-    if (_x > 800 || _x < 0) _alive = false;
-    if (_y > 800 || _y < 0) _alive = false;
+    if (_x > 800) _alive = false;
+    if (_y > 800) _alive = false;
 }
