@@ -1,8 +1,13 @@
 #include "../include/Game.h"
 
 #include <iostream>
+<<<<<<< HEAD
 #include <future>
 #include <algorithm>
+||||||| 20d7023... Implemented Bullet Movement
+#include <future>
+=======
+>>>>>>> parent of 20d7023... Implemented Bullet Movement
 
 Game::Game(std::size_t Grid_Width, std::size_t Grid_Height) : Grid_Width(Grid_Width), Grid_Height(Grid_Height), Score(0) {
     asteroids.emplace_back(std::make_shared<Asteroid>(large, 100, 100, 225));
@@ -27,8 +32,6 @@ void Game::Run(Controller& controller, Renderer& renderer, const int& Target_Fra
         Frame_Start = SDL_GetTicks();
 
         controller.HandleInput(running, player, bullets);
-
-        Update();
 
         renderer.Render(asteroids, bullets, player);
 
