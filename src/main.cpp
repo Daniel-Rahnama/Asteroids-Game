@@ -6,7 +6,6 @@
 #include "../include/Game.h"
 
 int main() {
-
     const unsigned int Screen_Width = 800;
     const unsigned int Screen_Height = 800;
     const unsigned int Grid_Width = 800;

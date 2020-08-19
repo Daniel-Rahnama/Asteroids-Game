@@ -20,7 +20,7 @@ public:
     Game(std::size_t, std::size_t);
     void Run(Controller&, Renderer&, const int& Target_Frame_Duration);
 private:
-    void Update();
+    void Update(bool&);
 
     std::vector<std::shared_ptr<Asteroid>> asteroids;
     std::vector<std::shared_ptr<Bullet>> bullets;

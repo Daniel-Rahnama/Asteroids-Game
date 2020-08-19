@@ -11,7 +11,6 @@ Game::Game(std::size_t Grid_Width, std::size_t Grid_Height) : Grid_Width(Grid_Wi
     asteroids.emplace_back(std::make_shared<Asteroid>(large, 700, 700, 315));
 
     player = std::make_shared<Player>();
-
 }
 
 void Game::Run(Controller& controller, Renderer& renderer, const int& Target_Frame_Duration) {
@@ -28,9 +27,7 @@ void Game::Run(Controller& controller, Renderer& renderer, const int& Target_Fra
 
         controller.HandleInput(running, player, bullets);
 
-        Update();
-
-        if (!player->IsAlive()) running = false;
+        Update(running);
 
         renderer.Render(asteroids, bullets, player);
 
@@ -53,7 +50,7 @@ void Game::Run(Controller& controller, Renderer& renderer, const int& Target_Fra
     std::cout << "Score: " << Score << std::endl;
 }
 
-void Game::Update() {
+void Game::Update(bool& running) {
     std::vector<std::future<void>> futures;
 
     for (std::shared_ptr<Bullet>& b : bullets) futures.emplace_back(std::async(&Bullet::Update, b.get()));
@@ -64,4 +61,5 @@ void Game::Update() {
 
     if (!asteroids.empty()) asteroids.erase(std::remove_if(asteroids.begin(), asteroids.end(), [](std::shared_ptr<Asteroid> a) { return !a->IsAlive(); }), asteroids.end());
     if (!bullets.empty()) bullets.erase(std::remove_if(bullets.begin(), bullets.end(), [](std::shared_ptr<Bullet> b) { return !b->IsAlive(); }), bullets.end());
+    if (!player->IsAlive()) running = false;
 }
