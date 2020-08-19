@@ -30,9 +30,6 @@ void Game::Run(Controller& controller, Renderer& renderer, const int& Target_Fra
 
         Update();
 
-        if (!asteroids.empty()) asteroids.erase(std::remove_if(asteroids.begin(), asteroids.end(), [](std::shared_ptr<Asteroid>& a) { return !a->IsAlive(); }));
-        if (!bullets.empty()) bullets.erase(std::remove_if(bullets.begin(), bullets.end(), [](std::shared_ptr<Bullet>& b) { return !b->IsAlive(); }));
-
         if (!player->IsAlive()) running = false;
 
         renderer.Render(asteroids, bullets, player);
@@ -59,11 +56,12 @@ void Game::Run(Controller& controller, Renderer& renderer, const int& Target_Fra
 void Game::Update() {
     std::vector<std::future<void>> futures;
 
-    for (std::shared_ptr<Bullet>& b : bullets) {
-        futures.emplace_back(std::async(&Bullet::Update, b.get()));
-    }
+    for (std::shared_ptr<Bullet>& b : bullets) futures.emplace_back(std::async(&Bullet::Update, b.get()));
 
-    for (std::shared_ptr<Asteroid>& a : asteroids) {
-        futures.emplace_back(std::async(&Asteroid::Update, a.get()));
-    }
+    for (std::shared_ptr<Asteroid>& a : asteroids) futures.emplace_back(std::async(&Asteroid::Update, a.get()));
+
+    for (std::future<void>& f : futures) f.wait();
+
+    if (!asteroids.empty()) asteroids.erase(std::remove_if(asteroids.begin(), asteroids.end(), [](std::shared_ptr<Asteroid> a) { return !a->IsAlive(); }), asteroids.end());
+    if (!bullets.empty()) bullets.erase(std::remove_if(bullets.begin(), bullets.end(), [](std::shared_ptr<Bullet> b) { return !b->IsAlive(); }), bullets.end());
 }

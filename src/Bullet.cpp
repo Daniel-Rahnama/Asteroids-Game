@@ -1,6 +1,7 @@
 #include "../include/Bullet.h"
 
 #include <cmath>
+#include <iostream>
 
 Bullet::Bullet(int x, int y, double angle) : _w(3), _h(3) {
     _alive = true;
@@ -27,6 +28,6 @@ void Bullet::Update() {
     _x += _speed * sin(angle);
     _y -= _speed * cos(angle);
 
-    if (_x > 800) _alive = false;
-    if (_y > 800) _alive = false;
+    if (_x > (unsigned int)800) _alive = false;
+    if (_y > (unsigned int)800) _alive = false;
 }
