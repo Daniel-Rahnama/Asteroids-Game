@@ -1,5 +1,7 @@
 #include "../include/Controller.h"
 
+#include <iostream>
+
 void Controller::HandleInput(bool& running, std::shared_ptr<Player> player, std::vector<std::shared_ptr<Bullet>>& bullets) {
     _player = player;
     _bullets = &bullets;
@@ -17,18 +19,12 @@ void Controller::HandleInput(bool& running, std::shared_ptr<Player> player, std:
             case SDLK_SPACE: FireBullet(); break;
             }
         }
-        else {
-            KeepTrue();
-        }
     }
 }
 
-void Controller::KeepTrue() {
-
-}
-
 void Controller::MoveForward() {
-
+    _player->_speed = 4;
+    _player->_direction = _player->_angle;
 }
 
 void Controller::TurnLeft() {

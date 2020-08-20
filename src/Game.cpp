@@ -57,6 +57,8 @@ void Game::Update(bool& running) {
 
     for (std::shared_ptr<Asteroid>& a : asteroids) futures.emplace_back(std::async(&Asteroid::Update, a.get()));
 
+    futures.emplace_back(std::async(&Player::Update, player.get()));
+
     for (std::future<void>& f : futures) f.wait();
 
     if (!asteroids.empty()) asteroids.erase(std::remove_if(asteroids.begin(), asteroids.end(), [](std::shared_ptr<Asteroid> a) { return !a->IsAlive(); }), asteroids.end());

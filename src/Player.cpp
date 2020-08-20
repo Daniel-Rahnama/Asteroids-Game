@@ -1,5 +1,7 @@
 #include "../include/Player.h"
 
+#include <cmath>
+
 Player::Player() {
     _alive = true;
 
@@ -24,4 +26,14 @@ const int& Player::h() {
     return _h;
 }
 
-void Player::Update() {}
+void Player::Update() {
+    double angle = 2 * 3.1415 * (_direction / 360);
+
+    _x -= _speed * sin(angle);
+    _y += _speed * cos(angle);
+
+    if (_x >= 800) _x = 0;
+    if (_y >= 800) _y = 0;
+    if (_x <= 0) _x = 800;
+    if (_y <= 0) _y = 800;
+}

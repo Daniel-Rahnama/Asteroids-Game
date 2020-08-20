@@ -16,6 +16,7 @@ public:
 
     void Update() override;
 private:
+    friend class Controller;
     int _w;
     int _h;
     double _direction;

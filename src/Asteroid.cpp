@@ -1,6 +1,7 @@
 #include "../include/Asteroid.h"
 
 #include <cmath>
+#include <iostream>
 
 Asteroid::Asteroid(AsteroidSize size, int x, int y, double angle) : _size(size) {
     _angle = angle;
@@ -31,6 +32,8 @@ void Asteroid::Update() {
     _x += _speed * sin(angle);
     _y -= _speed * cos(angle);
 
-    if (_x >= 800) _x -= 800;
-    if (_y >= 800) _y -= 800;
+    if (_x >= 800) _x = 0;
+    if (_y >= 800) _y = 0;
+    if (_x <= 0) _x = 800;
+    if (_y <= 0) _y = 800;
 }

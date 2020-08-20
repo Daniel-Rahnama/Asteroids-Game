@@ -14,7 +14,6 @@ class Controller {
 public:
     void HandleInput(bool&, std::shared_ptr<Player>, std::vector<std::shared_ptr<Bullet>>&);
 private:
-    void KeepTrue();
     void MoveForward();
     void TurnLeft();
     void TurnRight();
