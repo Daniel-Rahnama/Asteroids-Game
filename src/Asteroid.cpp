@@ -27,7 +27,6 @@ const int& Asteroid::GetRadius() {
 }
 
 void Asteroid::Update() {
-    // angle in degree * Pi / 180
     double angle = _angle * (3.1415 / 180);
 
     _x += _speed * sin(angle);

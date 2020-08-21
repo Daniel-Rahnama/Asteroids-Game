@@ -11,7 +11,6 @@ public:
 
     virtual void Update() = 0;
 protected:
-    friend class Controller;
     unsigned int _x;
     unsigned int _y;
     unsigned int _speed;

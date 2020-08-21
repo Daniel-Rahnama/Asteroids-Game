@@ -137,7 +137,7 @@ void Renderer::BulletRender(std::shared_ptr<Bullet> b) {
 }
 
 void Renderer::PlayerRender(std::shared_ptr<Player> p) {
-    double angle = 2 * 3.1415 * (p->Angle() / 360);
+    double angle = p->Angle() * (3.1415 / 180);
 
     double x1 = p->x();
     double y1 = p->y() - p->h() / 2;
