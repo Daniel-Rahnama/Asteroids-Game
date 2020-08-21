@@ -1,7 +1,5 @@
 #include "../include/Controller.h"
 
-#include <iostream>
-
 void Controller::HandleInput(bool& running, std::shared_ptr<Player> player, std::vector<std::shared_ptr<Bullet>>& bullets) {
     _player = player;
     _bullets = &bullets;
@@ -23,8 +21,8 @@ void Controller::HandleInput(bool& running, std::shared_ptr<Player> player, std:
 }
 
 void Controller::MoveForward() {
-    _player->_speed = 4;
     _player->_direction = _player->_angle;
+    _player->_speed = 3;
 }
 
 void Controller::TurnLeft() {
@@ -36,7 +34,7 @@ void Controller::TurnRight() {
 }
 
 void Controller::FireBullet() {
-    double angle = 2 * 3.1415 * (_player->Angle() / 360);
+    double angle = _player->Angle() * (3.1415 / 180);
 
     double x1 = _player->x();
     double y1 = _player->y() - _player->h() / 2;

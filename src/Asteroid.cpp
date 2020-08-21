@@ -27,13 +27,14 @@ const int& Asteroid::GetRadius() {
 }
 
 void Asteroid::Update() {
-    double angle = 2 * 3.1415 * (_angle / 360);
+    // angle in degree * Pi / 180
+    double angle = _angle * (3.1415 / 180);
 
     _x += _speed * sin(angle);
     _y -= _speed * cos(angle);
 
-    if (_x >= 800) _x = 0;
-    if (_y >= 800) _y = 0;
-    if (_x <= 0) _x = 800;
-    if (_y <= 0) _y = 800;
+    if (_x >= 799) _x = 0;
+    if (_y >= 799) _y = 0;
+    if (_x <= 0) _x = 799;
+    if (_y <= 0) _y = 799;
 }

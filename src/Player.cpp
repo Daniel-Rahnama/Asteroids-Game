@@ -27,10 +27,10 @@ const int& Player::h() {
 }
 
 void Player::Update() {
-    double angle = 2 * 3.1415 * (_direction / 360);
+    double angle = _direction * (3.1415 / 180);
 
-    _x -= _speed * sin(angle);
-    _y += _speed * cos(angle);
+    _x += _speed * sin(angle);
+    _y -= _speed * cos(angle);
 
     if (_x >= 800) _x = 0;
     if (_y >= 800) _y = 0;
