@@ -39,6 +39,19 @@ void Asteroid::Update() {
 }
 
 bool Asteroid::Collision(std::shared_ptr<Bullet> b) {
-    // TODO: Implement Asteroid-Bullet Collision
+    int tempX = x();
+    int tempY = y();
+
+    if (x() < b->x()) tempX = b->x();
+    else if (x() < (b->x() + b->w())) tempX = b->x() + b->w();
+
+    if (y() < b->y()) tempY = b->y();
+    else if (y() < (b->y() + b->h())) tempY = b->y() + b->h();
+
+    double distX = x() - tempX;
+    double distY = y() - tempY;
+    double distance = sqrt((distX * distX) + (distY * distY));
+
+    if (distance <= GetRadius()) { _alive = false; return true; }
     return false;
 }
