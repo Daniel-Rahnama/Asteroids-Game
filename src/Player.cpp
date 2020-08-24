@@ -37,3 +37,7 @@ void Player::Update() {
     if (_x <= 0) _x = 800;
     if (_y <= 0) _y = 800;
 }
+
+void Player::Collision(std::shared_ptr<Asteroid> a) {
+    // TODO: Implement Player-Asteroid Collision
+}

@@ -37,3 +37,8 @@ void Asteroid::Update() {
     if (_x <= 0) _x = 799;
     if (_y <= 0) _y = 799;
 }
+
+bool Asteroid::Collision(std::shared_ptr<Bullet> b) {
+    // TODO: Implement Asteroid-Bullet Collision
+    return false;
+}

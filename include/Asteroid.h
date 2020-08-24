@@ -3,6 +3,9 @@
 
 #include "Entity.h"
 
+#include <memory>
+#include "Bullet.h"
+
 enum AsteroidSize {
     large,
     medium,
@@ -21,6 +24,8 @@ public:
     const int& GetRadius();
 
     void Update() override;
+
+    bool Collision(std::shared_ptr<Bullet>);
 private:
     AsteroidSize _size;
     int _radius;

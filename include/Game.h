@@ -21,7 +21,7 @@ public:
     void Run(Controller&, Renderer&, const int& Target_Frame_Duration);
 private:
     void Update(bool&);
-
+    
     std::vector<std::shared_ptr<Asteroid>> asteroids;
     std::vector<std::shared_ptr<Bullet>> bullets;
     std::shared_ptr<Player> player;

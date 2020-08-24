@@ -61,6 +61,10 @@ void Game::Update(bool& running) {
 
     for (std::future<void>& f : futures) f.wait();
 
+    for (std::shared_ptr<Asteroid>& a : asteroids) for (std::shared_ptr<Bullet>& b : bullets) if (a->Collision(b)) Score += 10;
+    
+    for (std::shared_ptr<Asteroid>& a : asteroids) player->Collision(a);
+
     if (!asteroids.empty()) asteroids.erase(std::remove_if(asteroids.begin(), asteroids.end(), [](std::shared_ptr<Asteroid> a) { return !a->IsAlive(); }), asteroids.end());
     if (!bullets.empty()) bullets.erase(std::remove_if(bullets.begin(), bullets.end(), [](std::shared_ptr<Bullet> b) { return !b->IsAlive(); }), bullets.end());
     if (!player->IsAlive()) running = false;

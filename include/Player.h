@@ -3,6 +3,9 @@
 
 #include "Entity.h"
 
+#include <memory>
+#include "Asteroid.h"
+
 class Player : public Entity {
 public:
     Player();
@@ -15,6 +18,8 @@ public:
     const int& h();
 
     void Update() override;
+
+    void Collision(std::shared_ptr<Asteroid>);
 private:
     friend class Controller;
     int _w;

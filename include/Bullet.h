@@ -18,6 +18,9 @@ public:
 private:
     int _w;
     int _h;
+
+    friend class Asteroid;
+    friend class Player;
 };
 
 #endif /* BULLET_H */
