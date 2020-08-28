@@ -66,13 +66,13 @@ void Player::Collision(std::shared_ptr<Asteroid> a) {
     double c3x = x3r - a->x();
     double c3y = y3r - a->y();
 
-    if (sqrt(((c1x * c1x) + (c1y * c1y)) <= a->GetRadius())) return;
-    if (sqrt(((c2x * c2x) + (c2y * c2y)) <= a->GetRadius())) return;
-    if (sqrt(((c3x * c3x) + (c3y * c3y)) <= a->GetRadius())) return;
+    if (sqrt(((c1x * c1x) + (c1y * c1y)) <= a->GetRadius())) { _alive = false; a->_alive = false; return; }
+    if (sqrt(((c2x * c2x) + (c2y * c2y)) <= a->GetRadius())) { _alive = false; a->_alive = false; return; }
+    if (sqrt(((c3x * c3x) + (c3y * c3y)) <= a->GetRadius())) { _alive = false; a->_alive = false; return; }
 
     if ((((y2r - y1r) * (a->x() - x1r) - (x2r - x1r) * (a->y() - y1r)) >= 0) && 
         (((y3r - y2r) * (a->x() - x2r) - (x3r - x2r) * (a->y() - y2r)) >= 0) &&
-        (((y1r - y3r) * (a->x() - x3r) - (x1r - x3r) * (a->x() - x3r)) >= 0)) return;
+        (((y1r - y3r) * (a->x() - x3r) - (x1r - x3r) * (a->x() - x3r)) >= 0)) { _alive = false; a->_alive = false; return; }
 
     double k;
 
@@ -89,7 +89,7 @@ void Player::Collision(std::shared_ptr<Asteroid> a) {
         k /= len;
 
         if (k < len) {
-            if (sqrt(c1x * c1x + c1y * c1y - k * k) <= a->GetRadius()) return;
+            if (sqrt(c1x * c1x + c1y * c1y - k * k) <= a->GetRadius()) { _alive = false; a->_alive = false; return; }
         }
     }
 
@@ -106,7 +106,7 @@ void Player::Collision(std::shared_ptr<Asteroid> a) {
         k /= len;
 
         if (k < len) {
-             if (sqrt(c2x * c2x + c2y * c2y - k * k) <= a->GetRadius()) return;
+             if (sqrt(c2x * c2x + c2y * c2y - k * k) <= a->GetRadius()) { _alive = false; a->_alive = false; return; }
         }
     }
 
@@ -123,7 +123,7 @@ void Player::Collision(std::shared_ptr<Asteroid> a) {
         k /= len;
 
         if (k < len) {
-            if (sqrt(c3x * c3x + c3y * c3y - k * k) <= a->GetRadius()) return;
+            if (sqrt(c3x * c3x + c3y * c3y - k * k) <= a->GetRadius()) { _alive = false; a->_alive = false; return; }
         }
     }
 }

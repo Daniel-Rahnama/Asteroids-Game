@@ -52,6 +52,6 @@ bool Asteroid::Collision(std::shared_ptr<Bullet> b) {
     double distY = y() - tempY;
     double distance = sqrt((distX * distX) + (distY * distY));
 
-    if (distance <= GetRadius()) { _alive = false; return true; }
+    if (distance <= GetRadius()) { _alive = false; b->_alive = false; return true; }
     return false;
 }

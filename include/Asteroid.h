@@ -5,6 +5,7 @@
 
 #include <memory>
 #include "Bullet.h"
+#include "Player.h"
 
 enum AsteroidSize {
     large,
@@ -29,6 +30,8 @@ public:
 private:
     AsteroidSize _size;
     int _radius;
+    
+    friend class Player;
 };
 
 #endif /* ASTEROID_H */
