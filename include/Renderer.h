@@ -3,7 +3,7 @@
 
 #include "SDL2/SDL.h"
 
- #include "Asteroid.h"
+#include "Asteroid.h"
 #include "Bullet.h"
 #include "Player.h"
 

@@ -5,7 +5,6 @@
 
 #include <memory>
 #include "Bullet.h"
-#include "Player.h"
 
 enum AsteroidSize {
     large,

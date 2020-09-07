@@ -6,7 +6,6 @@
 
 #include <memory>
 
-
 class Player : public Entity {
 public:
     Player();
