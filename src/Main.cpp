@@ -1,9 +1,4 @@
-#include "../include/Renderer.h"
-#include "../include/Bullet.h"
-#include "../include/Player.h"
-#include "../include/Asteroid.h"
-#include "../include/Controller.h"
-#include "../include/Game.h"
+#include "../include/Main.h"
 
 int main() {
     const unsigned int Screen_Width = 800;

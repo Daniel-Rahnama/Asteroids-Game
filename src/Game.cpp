@@ -3,6 +3,8 @@
 #include <iostream>
 #include <future>
 #include <algorithm>
+#include <ctime>
+#include <cstdlib>
 
 Game::Game(std::size_t Grid_Width, std::size_t Grid_Height) : Grid_Width(Grid_Width), Grid_Height(Grid_Height), Score(0) {
     asteroids.emplace_back(std::make_shared<Asteroid>(large, 100, 100, 135));
@@ -14,11 +16,14 @@ Game::Game(std::size_t Grid_Width, std::size_t Grid_Height) : Grid_Width(Grid_Wi
 }
 
 void Game::Run(Controller& controller, Renderer& renderer, const int& Target_Frame_Duration) {
+    srand(time(NULL));
+
     Uint32 Title_Timestamp = SDL_GetTicks();
     Uint32 Frame_Start;
     Uint32 Frame_End;
     Uint32 Frame_Duration;
     unsigned int Frame_Count = 0;
+    unsigned int Second_Count = 0;
 
     bool running = true;
 
@@ -37,6 +42,9 @@ void Game::Run(Controller& controller, Renderer& renderer, const int& Target_Fra
         Frame_Count++;
 
         if (Frame_End - Title_Timestamp >= 1000) {
+            Second_Count++;
+            if (Second_Count % 2 == 0)
+                asteroids.emplace_back(std::make_shared<Asteroid>(large, (rand() % 800) + 1, (rand() % 800) + 1, (rand() % 360) + 1));
             renderer.UpdateWindowTitle(Score, Frame_Count);
             Frame_Count = 0;
             Title_Timestamp = Frame_End;
@@ -64,7 +72,7 @@ void Game::Update(bool& running) {
     for (std::shared_ptr<Asteroid>& a : asteroids) if (a->IsAlive()) for (std::shared_ptr<Bullet>& b : bullets) if (b->IsAlive()) if (a->Collision(b)) {
         if (a->GetSize() == large) {
             asteroids.emplace_back(std::make_shared<Asteroid>(medium, a->x() - 200, a->y() - 200, a->Angle()));
-            asteroids.emplace_back(std::make_shared<Asteroid>(medium, a->x() + 200, a->y() + 200, a->Angle()));
+            // asteroids.emplace_back(std::make_shared<Asteroid>(medium, a->x() + 200, a->y() + 200, a->Angle())); <- Segmentation Fault caused by 'a->Angle()'.
             Score += 10;
         }
         else if (a->GetSize() == medium) {
