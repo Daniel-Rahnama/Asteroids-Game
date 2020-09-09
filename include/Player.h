@@ -9,10 +9,6 @@
 class Player : public Entity {
 public:
     Player();
-    Player(const Player&) = delete;
-    Player& operator=(const Player&) = delete;
-    Player(Player&&);
-    Player& operator=(Player&&);
 
     const int& w();
     const int& h();

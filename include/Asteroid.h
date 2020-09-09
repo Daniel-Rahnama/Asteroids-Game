@@ -15,10 +15,6 @@ enum AsteroidSize {
 class Asteroid : public Entity {
 public:
     Asteroid(AsteroidSize, int, int, double);
-    Asteroid(const Asteroid&) = delete;
-    Asteroid& operator=(const Asteroid&) = delete;
-    Asteroid(Asteroid&&);
-    Asteroid& operator=(Asteroid&&);
 
     const AsteroidSize& GetSize();
     const int& GetRadius();
