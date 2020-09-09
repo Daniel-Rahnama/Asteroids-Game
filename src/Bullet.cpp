@@ -25,8 +25,11 @@ const int& Bullet::h() {
 void Bullet::Update() {
     double angle = _angle * (3.1415 / 180);
 
-    _x += _speed * sin(angle);
-    _y -= _speed * cos(angle);
+    // _x += _speed * sin(angle);
+    // _y -= _speed * cos(angle);
+
+    _x += _speed * cos(angle);
+    _y -= _speed * sin(angle);
 
     if (_x > 800) _alive = false;
     if (_y > 800) _alive = false;

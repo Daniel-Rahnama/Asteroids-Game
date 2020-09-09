@@ -72,7 +72,7 @@ void Game::Update(bool& running) {
     for (std::shared_ptr<Asteroid>& a : asteroids) if (a->IsAlive()) for (std::shared_ptr<Bullet>& b : bullets) if (b->IsAlive()) if (a->Collision(b)) {
         if (a->GetSize() == large) {
             asteroids.emplace_back(std::make_shared<Asteroid>(medium, a->x() - 200, a->y() - 200, a->Angle()));
-            // asteroids.emplace_back(std::make_shared<Asteroid>(medium, a->x() + 200, a->y() + 200, a->Angle())); <- Segmentation Fault caused by 'a->Angle()'.
+            asteroids.emplace_back(std::make_shared<Asteroid>(medium, a->x() + 200, a->y() + 200, a->Angle())); // <- Segmentation Fault caused by 'a->Angle()'.
             Score += 10;
         }
         else if (a->GetSize() == medium) {
