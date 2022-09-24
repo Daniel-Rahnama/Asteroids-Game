@@ -1,6 +1,6 @@
 #include "../include/Main.h"
 
-int main() {
+int main(int argc, char *argv[]) {
     Controller controller;
 
     Renderer renderer(Screen_Width, Screen_Height);

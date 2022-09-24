@@ -1,5 +1,7 @@
 #include "../include/Controller.h"
 
+#include <cmath>
+
 void Controller::HandleInput(bool& running, std::shared_ptr<Player> player, std::vector<std::shared_ptr<Bullet>>& bullets) {
     _player = player;
     _bullets = &bullets;
